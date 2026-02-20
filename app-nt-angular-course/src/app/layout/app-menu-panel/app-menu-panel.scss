@@ -1,0 +1,25 @@
+.sidenav {
+  height: 100vh; /* Full-height: remove this if you want "auto" height */
+  width: 300px;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow: auto;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 10px;
+  background-color: #312450;
+  color: rgb(56, 53, 53);
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav div {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;  
+  font-size: 16pt;
+}

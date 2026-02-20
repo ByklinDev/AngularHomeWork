@@ -1,0 +1,7 @@
+  <aside class="sidenav">
+    <nav class="nav">
+      @for (item of menuitems; track item.id) {
+        <app-app-menu-item [caption]="item.name"></app-app-menu-item>
+      }
+    </nav>
+  </aside>
