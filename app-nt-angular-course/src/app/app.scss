@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+.main-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.header{
+    height: 100px;
+    position: sticky;
+    top: 0;
+    background-color: #1d629e;
+}
+.menu { 
+    width: 25%;
+    min-width: 180px;
+    background-color: #312450;
+}
+.content {
+  flex: 1;
+  background-color: #52398a;
+}

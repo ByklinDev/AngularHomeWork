@@ -1,20 +1,4 @@
-$menu-width: 300px;
-$menu-bg: #312450;
-
-.sidenav {
-  height: 100vh; /* Full-height: remove this if you want "auto" height */
-  width: $menu-width;
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 100; /* Stay on top */
-  inset: 0 auto 0 0;
-  overflow: auto;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 10px;
-  background-color: $menu-bg;
-  color: rgb(56, 53, 53);
-
 .nav {
     display: flex;
     flex-direction: column;
-}
 }
