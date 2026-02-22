@@ -2,22 +2,27 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
+  overflow: hidden;
 }
 .main-body {
   display: flex;
   width: 100%;
   flex-direction: column;
+  overflow-y: auto;
 }
 .header{
-    height: 100px;
+    height: 160px;
     position: sticky;
     top: 0;
     background-color: #1d629e;
+    overflow: initial;
 }
 .menu { 
     width: 25%;
     min-width: 180px;
     background-color: #312450;
+    position: sticky;
+    left:0;
 }
 .content {
   flex: 1;
