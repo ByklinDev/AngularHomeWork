@@ -1,3 +1,5 @@
+@use 'abstracts/_variables' as vars;
+
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -11,20 +13,23 @@
   overflow-y: auto;
 }
 .header{
-    height: 160px;
+    height: 90px;
     position: sticky;
     top: 0;
-    background-color: #1d629e;
+    background-color: vars.$background-color;
     overflow: initial;
+    border-bottom: 3px solid vars.$accent-color; 
+  padding: 10px 20px;
+  height: 90px;;
 }
 .menu { 
     width: 25%;
     min-width: 180px;
-    background-color: #312450;
+    background-color: #2C3E50;
     position: sticky;
     left:0;
 }
 .content {
   flex: 1;
-  background-color: #52398a;
+  background-color: #F5F5F5;
 }

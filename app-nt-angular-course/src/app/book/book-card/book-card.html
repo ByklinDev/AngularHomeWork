@@ -1,0 +1,13 @@
+<div class="book-card">
+  @if (book()?.coverUrl) {
+    <img [src]="book()?.coverUrl" [alt]="book()?.title" class="book-cover" />
+  } @else {
+    <img src="/cover.png" [alt]="book()?.title" class="book-cover" />
+    <!-- <div class="no-cover">Нет обложки</div> -->
+  }
+  <h4 class="book-title">{{ book()?.title }}</h4>
+  <p class="book-author">{{ book()?.author }}</p>
+  <p class="book-year">{{ book()?.year }}</p>
+  <p class="book-genre">{{ book()?.genre }}</p>
+  <p class="rating">Rating: <span class="rating-value">{{ book()?.rating }}</span> ⭐</p>
+</div>

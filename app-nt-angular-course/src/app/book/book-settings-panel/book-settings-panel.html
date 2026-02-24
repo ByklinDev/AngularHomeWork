@@ -1,0 +1,15 @@
+<div class="sort-controls">
+    <div class="select-wrapper">
+      <select #criterionSelect class="sort-select" title="criteria">
+        <option value="title">По названию</option>
+        <option value="year">По году</option>
+        <option value="rating">По рейтингу</option>
+        <option value="author">По автору</option>
+      </select>
+    </div>
+
+    <button (click)="onSort(criterionSelect.value)" class="sort-button" title="sort-asc">
+      <span>Сортировать</span>
+      <i class="arrow" [class.desc]="!isAsc"></i>
+    </button>
+  </div>

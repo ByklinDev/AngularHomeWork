@@ -1,0 +1,84 @@
+@use 'abstracts/_variables' as vars;
+
+
+select {
+  appearance: none; 
+  background-color: vars.$background-color;
+  border: 1px solid vars.$border-light-color;
+  border-radius: 8px;
+  padding: 10px 40px 10px 16px;
+  font-size: 14px;
+  color: vars.$primary-color;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+
+
+select:focus {
+  border-color: vars.$accent-color;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  color: vars.$primary-color;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 10px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: vars.$text-gray-color;
+}
+
+.sort-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.sort-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: vars.$accent-color;
+  color: vars.$text-light-color;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.1s active, background-color 0.2s;
+}
+
+
+
+.sort-button:active {
+  transform: scale(0.98);
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
+  transition: transform 0.3s ease;
+}
+
+.arrow.desc {
+  transform: rotate(180deg);
+}

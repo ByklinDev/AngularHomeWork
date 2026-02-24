@@ -1,0 +1,16 @@
+.box{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  color: rgb(255, 255, 255);
+  height: 100%;
+  min-width: 0;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
