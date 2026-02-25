@@ -19,8 +19,8 @@
     background-color: vars.$background-color;
     overflow: initial;
     border-bottom: 3px solid vars.$accent-color; 
-  padding: 10px 20px;
-  height: 90px;;
+    padding: 10px 20px;
+    z-index: 101;
 }
 .menu { 
     width: 25%;
