@@ -8,8 +8,8 @@
     justify-content: space-between;
     margin-left: 8px;
     margin-right: 8px;
-
 }
+
 .genre-button {
     background-color: var(--primary-color);
     color: #576574;
@@ -23,6 +23,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: transform 0.1s active, background-color 0.2s;
+    @include vars.theme-style(color, primary);
 }
 
 .active-genre {
@@ -42,10 +43,9 @@
 
 .icon {
   display: inline-block;
-  width: 25px;  /* Ширина иконки */
-  height: 25px; /* Высота иконки */ 
+  width: 25px;  
+  height: 25px; 
   
-  /* Указываем путь к вашему PNG */
   background-image: url('/settings.png');
   background-size: contain;
   background-repeat: no-repeat;

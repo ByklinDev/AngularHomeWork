@@ -1,5 +1,7 @@
 import { Book } from './book';
 
+export const MOCK_BOOKS_EMPTY: Book[] = [];
+
 export const MOCK_BOOKS: Book[] = [
   {
     id: 1,
@@ -59,7 +61,7 @@ export const MOCK_BOOKS: Book[] = [
     author: 'Энди Уир',
     year: 2011,
     genre: 'Научная фантастика',
-    rating: 4.4,
+    rating: 3.4,
     coverUrl: 'https://picsum.photos/id/50/200/300',
   },
   {
@@ -76,7 +78,7 @@ export const MOCK_BOOKS: Book[] = [
     author: 'Ф. Скотт Фицджеральд',
     year: 1925,
     genre: 'Классика',
-    rating: 4.3,
+    rating: 3.3,
     coverUrl: 'https://picsum.photos/id/60/200/300',
   },
   {
