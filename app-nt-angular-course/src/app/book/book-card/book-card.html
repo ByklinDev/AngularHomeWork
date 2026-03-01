@@ -1,4 +1,10 @@
-<div class="book-card" (click)="openBookDetails()">
+<div
+  appHighlightCard
+  class="book-card"
+  [class.card-selected]="bookService.isSelectedBook(book()!)"
+  (click)="selectBook()"
+  [ngClass]="{ 'is-favorite': isFavourite() }"
+>
   <ng-container *ngTemplateOutlet="customTemplate || defaultTemplate; context: { $implicit: book }">
   </ng-container>
   <ng-content select="[card-footer]"></ng-content>
@@ -15,6 +21,10 @@
   <p class="book-year">{{ book()?.year }}</p>
   <p class="book-genre">{{ book()?.genre }}</p>
   <p class="rating">
-    Rating: <span class="rating-value">{{ book()?.rating }}</span> <i *appIfHighRating="book().rating" >⭐</i>
+    Rating: <span class="rating-value">{{ book()?.rating }}</span>
+    <i *appIfHighRating="book().rating">⭐</i>
+    @if (isBookFavorite()) {
+      <span class="favorite"> ❤️</span>
+    }
   </p>
 </ng-template>

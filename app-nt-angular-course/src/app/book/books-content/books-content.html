@@ -5,9 +5,14 @@
   <div class="box" *ngIf="books$ | async as books; else noData">
     <div *ngIf="books.length > 0; else noData" class="box">
       @for (item of books$ | async; track item.id) {
-        <app-book-card [book]="item" [customTemplate]="item.year < 1950 ? customTemplate : undefined">
-          <div card-footer>
-            <button class="buy-button">Купить</button>
+        <app-book-card
+          #bookCard
+          [book]="item"
+          [customTemplate]="item.year < 1950 ? customTemplate : undefined"
+        >
+          <div card-footer class="footer-card">
+            <button class="detail-button" (click)="bookCard.openBookDetails()">Подробнее</button>
+            <button class="favorite-button" (click)="bookCard.addToFavorites($event)">В избранное</button>
           </div>
         </app-book-card>
       }
@@ -27,5 +32,8 @@
     <p class="book-author">{{ book()?.author }}</p>
     <p class="book-year">{{ book()?.year }}</p>
     <p class="book-genre">{{ book()?.genre }}</p>
+    @if (isBookFavorite(book()!)) {
+      <p class="favorite"><span> ❤️</span></p>
+    }
   </div>
 </ng-template>

@@ -14,5 +14,9 @@ import { BookMenu } from "../book-menu/book-menu";
 export class BooksContent {
   private bookService = inject(BookService);
   books$ = this.bookService.filteredBooks$;
+
+  isBookFavorite(book: any): boolean {
+    return this.bookService.isFavorite(book);
+  }
 }
   

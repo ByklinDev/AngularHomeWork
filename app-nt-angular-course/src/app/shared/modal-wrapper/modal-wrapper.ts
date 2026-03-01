@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Output,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-modal-wrapper',
@@ -13,5 +20,9 @@ export class ModalWrapper {
 
   onClose() {
     this.close.emit();
+  }
+  @HostListener('window:keydown.escape')
+  handleKeyDown() {
+    this.onClose();
   }
 }

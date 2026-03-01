@@ -28,33 +28,38 @@
   font-size: 1.2rem;
 }
 
-.buy-button {
+.footer-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail-button, .favorite-button {
     background-color: vars.$accent-color;
     color: vars.$background-color;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
+
 }
 
-/* Контейнер ретро-карточки */
 .short-card {
-  background: #fdf5e6; /* Цвет "старая бумага" */
+  background: #fdf5e6; 
   border: 1px solid #d2b48c;
   padding: 10px;
   position: relative;
   box-shadow: 
-    3px 3px 0px #8b4513, /* Жесткая "типографская" тень */
-    inset 0 0 50px rgba(0,0,0,0.05); /* Легкий градиент старины */
+    3px 3px 0px #8b4513,
+    inset 0 0 50px rgba(0,0,0,0.05); 
   font-family: 'Georgia', 'Times New Roman', serif;
   color: #2c1e1e;
   transition: transform 0.2s ease;
   overflow: hidden;
   margin-bottom: 10px;
-  min-height: 200px;
+  min-height: 230px;
 }
 
 
