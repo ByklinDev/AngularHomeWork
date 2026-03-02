@@ -1,0 +1,10 @@
+<main class="content">
+  <div class="settings">
+    <app-book-menu></app-book-menu>
+  </div>
+  <div class="box">
+    @for (item of books$ | async; track item.id) {
+      <app-book-card [book]="item"></app-book-card>
+    }
+  </div>
+</main>

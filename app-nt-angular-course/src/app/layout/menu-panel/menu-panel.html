@@ -1,7 +1,7 @@
-  <aside class="sidebar">
-    <nav class="nav">
-      @for (item of menuitems; track item.id) {
-        <app-menu-item [caption]="item.name"></app-menu-item>
-      }
-    </nav>
-  </aside>
+<aside class="sidebar">
+  <nav class="nav">
+    @for (item of MENUITEMS; track item.id) {
+      <app-menu-item [caption]="item?.name"></app-menu-item>
+    }
+  </nav>
+</aside>

@@ -1,0 +1,67 @@
+@use 'abstracts/_variables' as vars;
+
+.book-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 10px;
+    justify-content: space-between;
+    margin-left: 8px;
+    margin-right: 8px;
+
+}
+.genre-button {
+    background-color: var(--primary-color);
+    color: #576574;
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.1s active, background-color 0.2s;
+}
+
+.active-genre {
+    color: #D4AF37;
+}
+.settings-toggle {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: inline-flex;
+
+}
+
+.icon {
+  display: inline-block;
+  width: 25px;  /* Ширина иконки */
+  height: 25px; /* Высота иконки */ 
+  
+  /* Указываем путь к вашему PNG */
+  background-image: url('/settings.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.settings-full {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 0px;
+}
+
+.book-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-bottom: 1px solid #E0D7C6;
+}

@@ -1,0 +1,56 @@
+@use 'abstracts/_variables' as vars;
+
+.book-card {
+  font-family: 'Georgia', serif;
+  border: 1px solid vars.$border-color;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px;
+  color:vars.$text-dark-color;
+  box-shadow: 2px 2px 5px vars.$text-dark-color;
+  background-color: vars.$background-color;
+  .book-title {
+    font-size: 1.1em;
+    font-family: 'Georgia', serif;
+    margin-bottom: 8px;
+    height: auto;
+    min-height: 55px;   
+    color: vars.$primary-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+    .rating {
+        font-weight: bold;
+        color: vars.$text-gray-color;
+        font-family: 'Segoe UI', sans-serif;
+        .rating-value {
+            color: vars.$accent-color;
+        }
+    }
+    .book-cover {
+        width: 100%;    
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 8px;
+        border-radius: 4px;
+    }
+}
+
+.book-author {
+  color: #7F8C8D;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+.book-genre {
+  color: #8d99ae;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+.book-year {
+  font-family: sans-serif;
+  color: #b2bec3;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}

@@ -1,4 +1,7 @@
+@use 'abstracts/_variables' as vars;
+
 .nav {
     display: flex;
     flex-direction: column;
+    color: vars.$text-light-color;
 }
