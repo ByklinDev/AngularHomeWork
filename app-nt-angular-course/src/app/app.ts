@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, signal, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, inject, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainContentPanel } from './layout/main-content-panel/main-content-panel';
 import { MenuPanel } from './layout/menu-panel/menu-panel';
@@ -16,7 +16,8 @@ export class App implements AfterViewInit {
 
   @ViewChild('dynamicBookDetails', { read: ViewContainerRef }) dynamicBookDetails!: ViewContainerRef;
 
-  constructor(private modalService: ModalService) {}
+  private modalService = inject(ModalService);
+  constructor() {}
 
   ngAfterViewInit() {
      this.modalService.setViewContainerRef(this.dynamicBookDetails);
