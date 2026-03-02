@@ -11,3 +11,16 @@ $text-gray-color: #6a7384;
 
 $border-color: #EEE;
 $border-light-color: #E0D7C6;
+
+$dark-theme: (
+  bg: #3a3939,
+  text: #fff,
+  primary: #F5F5F5,
+  accent: #D4AF37
+);
+
+@mixin theme-style($property, $key) {
+  @media (prefers-color-scheme: dark) {
+    #{$property}: map-get($dark-theme, $key);
+  }
+}

@@ -25,6 +25,7 @@
   color: vars.$primary-color;
   letter-spacing: 1px;
   text-transform: capitalize;
+  @include vars.theme-style(color, primary);
   span {
     color: vars.$accent-color;
   }

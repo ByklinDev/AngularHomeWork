@@ -21,15 +21,21 @@
     border-bottom: 3px solid vars.$accent-color; 
     padding: 10px 20px;
     z-index: 101;
+    @include vars.theme-style(background-color, bg);
+   @include vars.theme-style(color, text);
 }
 .menu { 
     width: 25%;
     min-width: 180px;
-    background-color: #2C3E50;
+    background-color: vars.$primary-color;
     position: sticky;
     left:0;
+    @include vars.theme-style(background-color, bg);
+  @include vars.theme-style(color, text);
 }
 .content {
   flex: 1;
   background-color: #F5F5F5;
+  @include vars.theme-style(background-color, bg);
+  @include vars.theme-style(color, text);
 }

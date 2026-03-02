@@ -2,9 +2,30 @@
   <div class="settings">
     <app-book-menu></app-book-menu>
   </div>
-  <div class="box">
-    @for (item of books$ | async; track item.id) {
-      <app-book-card [book]="item"></app-book-card>
-    }
+  <div class="box" *ngIf="books$ | async as books; else noData">
+    <div *ngIf="books.length > 0; else noData" class="box">
+      @for (item of books$ | async; track item.id) {
+        <app-book-card [book]="item" [customTemplate]="item.year < 1950 ? customTemplate : undefined">
+          <div card-footer>
+            <button class="buy-button">Купить</button>
+          </div>
+        </app-book-card>
+      }
+    </div>
   </div>
 </main>
+
+<ng-template #noData>
+  <div class="no-data">
+    <p>Не найдено книг.</p>
+  </div>
+</ng-template>
+
+<ng-template #customTemplate let-book>
+  <div class="short-card">
+    <h4 class="book-title">{{ book()?.title }}</h4>
+    <p class="book-author">{{ book()?.author }}</p>
+    <p class="book-year">{{ book()?.year }}</p>
+    <p class="book-genre">{{ book()?.genre }}</p>
+  </div>
+</ng-template>
