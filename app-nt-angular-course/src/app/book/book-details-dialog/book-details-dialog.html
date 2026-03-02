@@ -1,0 +1,17 @@
+<div class="book-details-dialog">
+  @if (book()?.coverUrl) {
+    <img [src]="book()?.coverUrl" [alt]="book()?.title" class="book-cover" />
+  } @else {
+    <img src="/cover.png" [alt]="book()?.title" class="book-cover" />
+  }
+  <div class="book-info">
+    <h2 class="book-title">{{ book()?.title }}</h2>
+    <p class="book-author"><strong>Author:</strong> {{ book()?.author }}</p>
+    <p class="book-year"><strong>Year:</strong> {{ book()?.year }}</p>
+    <p class="book-genre"><strong>Genre:</strong> {{ book()?.genre }}</p>
+    <p class="rating">
+      <strong>Rating: </strong> <span class="rating-value">{{ book()?.rating }} </span>
+      <i *appIfHighRating="book()!.rating"> ⭐</i>
+    </p>
+  </div>
+</div>
