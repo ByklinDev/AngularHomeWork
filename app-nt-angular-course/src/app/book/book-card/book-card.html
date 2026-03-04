@@ -5,7 +5,8 @@
   (click)="selectBook()"
   [ngClass]="{ 'is-favorite': isFavourite() }"
 >
-  <ng-container *ngTemplateOutlet="customTemplate || defaultTemplate; context: { $implicit: book }">
+  <ng-container 
+  *ngTemplateOutlet="customTemplate || defaultTemplate; context: { $implicit: book, isFav: isFavourite() }">
   </ng-container>
   <ng-content select="[card-footer]"></ng-content>
 </div>
@@ -23,7 +24,7 @@
   <p class="rating">
     Rating: <span class="rating-value">{{ book()?.rating }}</span>
     <i *appIfHighRating="book().rating">⭐</i>
-    @if (isBookFavorite()) {
+    @if (isFavourite()) {
       <span class="favorite"> ❤️</span>
     }
   </p>

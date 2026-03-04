@@ -6,8 +6,8 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { HighRatingBookDirective } from '../high-rating-book-directive';
 import { HighlightCardDirective } from '../../shared/directives/highlight-card-directive';
 import { BookService } from '../book-service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-book-card',
@@ -21,12 +21,23 @@ export class BookCard {
 
   book = input<Book>();
 
-  isFavourite = toSignal(
-  this.bookService.favoriteBooks$.pipe(
-    map(favs => favs.some(f => f.id === this.book()?.id))
-  ), 
-  { initialValue: false }
-);
+//   public isFavourite = toSignal(
+//   this.bookService.favoriteBooks$.pipe(
+//     map(favs => favs.some(f => f.id === this.book()?.id))
+//   ), 
+//   { initialValue: false }
+// );
+
+
+public isFavourite = toSignal(
+    combineLatest([
+      this.bookService.favoriteBooks$, 
+      toObservable(this.book) // Превращаем сигнал в поток, чтобы реагировать на смену книги
+    ]).pipe(
+      map(([favs, book]) => favs.some(f => f.id === book?.id))
+    ),
+    { initialValue: false }
+  );
 
   @Input() customTemplate?: TemplateRef<any>;
 
@@ -43,9 +54,5 @@ export class BookCard {
     if (this.book()) {
       this.bookService.addToFavorites(this.book()!);
     }
-  }
-
-  isBookFavorite(): boolean {
-    return this.bookService.isFavorite(this.book()!);
   }
 }

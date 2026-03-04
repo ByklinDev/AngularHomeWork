@@ -32,13 +32,13 @@
   </div>
 </ng-template>
 
-<ng-template #customTemplate let-book>
+<ng-template #customTemplate let-book let-isFav="isFav">
   <div class="short-card">
     <h4 class="book-title">{{ book()?.title }}</h4>
     <p class="book-author">{{ book()?.author }}</p>
     <p class="book-year">{{ book()?.year }}</p>
     <p class="book-genre">{{ book()?.genre }}</p>
-    @if (isBookFavorite(book()!)) {
+    @if (isFav) {
       <p class="favorite"><span> ❤️</span></p>
     }
   </div>

@@ -5,7 +5,14 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
   standalone: true,
 })
 export class HighlightCardDirective {
-  @Input() defaultColor: string | null = null;
+  private _defaultColor: string | null = null;
+
+  @Input() set defaultColor(value: string | null) {
+    this._defaultColor = value;
+    if (!this.isHighlighted) {
+      this.backgroundColor = value;
+    }
+  }
   @Input() highlightColor: string = '#8a5b73';
 
   private isHighlighted: boolean = false;
@@ -18,9 +25,7 @@ export class HighlightCardDirective {
   }
   @HostBinding('style.cursor') cursor = 'pointer';
 
-  constructor() {
-    this.backgroundColor = this.defaultColor;
-  }
+  constructor() {}
 
   @HostListener('mouseenter') onMouseEnter() {
     this.isHighlighted = true;
@@ -29,6 +34,6 @@ export class HighlightCardDirective {
 
   @HostListener('mouseleave') onMouseLeave() {
     this.isHighlighted = false;
-    this.backgroundColor = this.defaultColor;
+    this.backgroundColor = this._defaultColor;
   }
 }
