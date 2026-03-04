@@ -2,16 +2,27 @@
   <div class="settings">
     <app-book-menu></app-book-menu>
   </div>
-  <div class="box" *ngIf="books$ | async as books; else noData">
-    <div *ngIf="books.length > 0; else noData" class="box">
-      @for (item of books$ | async; track item.id) {
-        <app-book-card [book]="item" [customTemplate]="item.year < 1950 ? customTemplate : undefined">
-          <div card-footer>
-            <button class="buy-button">Купить</button>
+  <div class="box">
+    @if (books$ | async; as books) {
+      @for (item of books; track item.id) {
+        <app-book-card
+          #bookCard
+          [book]="item"
+          [customTemplate]="item.year < 1950 ? customTemplate : undefined"
+        >
+          <div card-footer class="footer-card">
+            <button class="detail-button" (click)="bookCard.openBookDetails()">Подробнее</button>
+            <button class="favorite-button" (click)="bookCard.addToFavorites($event)">
+              В избранное
+            </button>
           </div>
         </app-book-card>
+      } @empty {
+        <ng-container *ngTemplateOutlet="noData"></ng-container>
       }
-    </div>
+    } @else {
+      <ng-container *ngTemplateOutlet="noData"></ng-container>
+    }
   </div>
 </main>
 
@@ -21,11 +32,14 @@
   </div>
 </ng-template>
 
-<ng-template #customTemplate let-book>
+<ng-template #customTemplate let-book let-isFav="isFav">
   <div class="short-card">
     <h4 class="book-title">{{ book()?.title }}</h4>
     <p class="book-author">{{ book()?.author }}</p>
     <p class="book-year">{{ book()?.year }}</p>
     <p class="book-genre">{{ book()?.genre }}</p>
+    @if (isFav) {
+      <p class="favorite"><span> ❤️</span></p>
+    }
   </div>
 </ng-template>

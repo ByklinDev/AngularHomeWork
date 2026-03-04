@@ -10,10 +10,14 @@ export class BookService {
   private booksSubject = new BehaviorSubject<Book[]>(MOCK_BOOKS);
   private genresSubject = new BehaviorSubject<string[]>([]);
   private selectedGenreSource = new BehaviorSubject<string | null>(null);
+  private selectedBookIdSource = new BehaviorSubject<number | null>(null);
+  private favoriteBooksSubject = new BehaviorSubject<Book[]>([]);
 
   books$ = this.booksSubject.asObservable();
   genres$ = this.genresSubject.asObservable();
   selectedGenre$ = this.selectedGenreSource.asObservable();
+  selectedBookId$ = this.selectedBookIdSource.asObservable();
+  favoriteBooks$ = this.favoriteBooksSubject.asObservable();
 
   filteredBooks$ = combineLatest([this.booksSubject, this.selectedGenreSource]).pipe(
     map(([books, selectedGenre]) => {
@@ -53,5 +57,30 @@ export class BookService {
   filterByGenre(genre: string | null) {
     console.log('Filtering by genre:', genre);
     this.selectedGenreSource.next(genre);
+  }
+
+  selectBookById(bookId: number | null) {
+    const nextId = this.selectedBookIdSource.value === bookId ? null : bookId;
+    this.selectedBookIdSource.next(nextId);
+  }
+
+  isSelectedBook(book: Book): boolean {
+    return book.id === this.selectedBookIdSource.value;
+  }
+
+  addToFavorites(book: Book) {
+    const currentFavorites = this.favoriteBooksSubject.value;
+    const isExist = currentFavorites.some((fav) => fav.id === book.id);
+
+    if (isExist) {
+      const updatedFavorites = currentFavorites.filter((fav) => fav.id !== book.id);
+      this.favoriteBooksSubject.next(updatedFavorites);
+    } else {
+      this.favoriteBooksSubject.next([...currentFavorites, book]);
+    }
+  }
+
+  isFavorite(book: Book): boolean {
+    return this.favoriteBooksSubject.value.some((fav) => fav.id === book.id);
   }
 }

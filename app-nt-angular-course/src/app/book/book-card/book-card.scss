@@ -7,12 +7,13 @@
   padding: 15px;
   margin: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 200px;
+  width: 250px;
   color:vars.$text-dark-color;
   box-shadow: 2px 2px 5px vars.$text-dark-color;
   background-color: vars.$background-color;
   @include vars.theme-style(background-color, bg);
   @include vars.theme-style(color, text);
+  
   .book-title {
     font-size: 1.1em;
     font-family: 'Georgia', serif;
@@ -36,28 +37,39 @@
     .book-cover {
         width: 100%;    
         height: 200px;
-        object-fit: cover;
+        object-fit: contain;
         margin-bottom: 8px;
         border-radius: 4px;
     }
 }
 
 .book-author {
-  color: #7F8C8D;
+  color: vars.$text-gray-color;
   font-size: 0.9rem;
   font-style: italic;
   @include vars.theme-style(color, primary);
 }
 .book-genre {
-  color: #8d99ae;
+  color: vars.$text-gray-color;
   font-size: 0.9rem;
   font-style: italic;
   @include vars.theme-style(color, primary);
 }
 .book-year {
   font-family: sans-serif;
-  color: #b2bec3;
+  color: vars.$text-gray-color;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
   @include vars.theme-style(color, primary);
 }
+
+.card-selected {
+  border-color: vars.$select-color; 
+  background-color: vars.$background-select-color; 
+  box-shadow: 0 10px 20px vars.$primary-color;
+}
+
+.is-favorite {
+    border-color: vars.$border-favorite-color;  
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.15);
+  }
