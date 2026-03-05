@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { BookService } from '../book-service';
 import { AsyncPipe } from '@angular/common';
-import { BookSettingsPanel } from "../book-settings-panel/book-settings-panel";
+import { BookSettingsPanel } from '../book-settings-panel/book-settings-panel';
+import { FilterBooksPipe } from '../filter-books-pipe';
 
 @Component({
   selector: 'app-book-menu',
@@ -10,7 +11,7 @@ import { BookSettingsPanel } from "../book-settings-panel/book-settings-panel";
   styleUrl: './book-menu.scss',
 })
 export class BookMenu {
-  private bookService = inject(BookService);
+  protected bookService = inject(BookService);
   isVisible = false;
   genres$ = this.bookService.genres$;
   selectedGenre$ = this.bookService.selectedGenre$;

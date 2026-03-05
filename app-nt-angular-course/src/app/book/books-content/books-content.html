@@ -2,8 +2,11 @@
   <div class="settings">
     <app-book-menu></app-book-menu>
   </div>
+  <div class="search-container">
+    <input class="search-input" [(ngModel)]="$searchTerm" placeholder="Поиск через пайп..." type="text">
+  </div>
   <div class="box">
-    @if (books$ | async; as books) {
+    @if ((books$ | async ) | filterBooks: $searchTerm(); as books) {
       @for (item of books; track item.id) {
         <app-book-card
           #bookCard

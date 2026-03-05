@@ -21,6 +21,13 @@
           </button>
         }
       </div>
+      <div class="search-container">
+        <input class="search-input"
+          type="text"
+          placeholder="Поиск через сервис..."
+          (input)="bookService.setSearchTerm($any($event.target).value)"
+        />
+      </div>
     </div>
     <div class="settings-short">
       <button

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { Book } from './book';
 import { MOCK_BOOKS } from './book-mock';
 
@@ -12,18 +12,31 @@ export class BookService {
   private selectedGenreSource = new BehaviorSubject<string | null>(null);
   private selectedBookIdSource = new BehaviorSubject<number | null>(null);
   private favoriteBooksSubject = new BehaviorSubject<Book[]>([]);
+  private searchTermSource = new BehaviorSubject<string>('');
 
   books$ = this.booksSubject.asObservable();
   genres$ = this.genresSubject.asObservable();
   selectedGenre$ = this.selectedGenreSource.asObservable();
   selectedBookId$ = this.selectedBookIdSource.asObservable();
+  searchTerm$ = this.searchTermSource.asObservable();
+
   favoriteBooks$ = this.favoriteBooksSubject.asObservable();
 
-  filteredBooks$ = combineLatest([this.booksSubject, this.selectedGenreSource]).pipe(
-    map(([books, selectedGenre]) => {
-      console.log('Filtering books with genre:', selectedGenre);
-      if (!selectedGenre) return books;
-      return books.filter((book) => book.genre === selectedGenre);
+  filteredBooks$ = combineLatest([
+    this.booksSubject,
+    this.selectedGenreSource,
+    this.searchTermSource,
+  ]).pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    map(([books, selectedGenre, searchTerm]) => {
+      return books.filter((book) => {
+        const matchesGenre = !selectedGenre || book.genre === selectedGenre;
+        const matchesSearch =
+          book.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+          book.author.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase());
+        return matchesGenre && matchesSearch;
+      });
     }),
   );
 
@@ -57,6 +70,10 @@ export class BookService {
   filterByGenre(genre: string | null) {
     console.log('Filtering by genre:', genre);
     this.selectedGenreSource.next(genre);
+  }
+
+  setSearchTerm(term: string) {
+    this.searchTermSource.next(term);
   }
 
   selectBookById(bookId: number | null) {
