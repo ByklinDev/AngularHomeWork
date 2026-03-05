@@ -27,3 +27,62 @@ $dark-theme: (
     #{$property}: map-get($dark-theme, $key);
   }
 }
+
+
+@mixin custom-search($base-color: #3f51b5, $bg-color: #f8f9fa, $border-radius: 12px ) {
+  position: relative;
+  display: block; 
+  width: 100%;
+
+  .search-input {
+    width: 100%;
+    box-sizing: border-box; // Чтобы padding не раздувал высоту
+    height: 46px;         // Фиксированная высота — залог ровной иконки
+    line-height: 46px;    // Совпадает с высотой для центрирования текста
+    padding: 0 40px;      // Отступы: 0 сверху/снизу, 40px слева (под лупу) и справа (под крестик)
+    
+    font-size: 16px;
+    background-color: $bg-color;
+    border: 2px solid transparent;
+    border-radius: $border-radius;
+    outline: none;
+    transition: all 0.3s ease;
+
+    &:focus {
+      background-color: #fff;
+      border-color: $base-color;
+    }
+  }
+
+  &::before {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%); // Тянет иконку ровно на её половину вверх
+    
+    font-size: 18px;
+    line-height: 1;        // Сбрасываем высоту строки иконки, чтобы она не «толкалась»
+    pointer-events: none;  // Чтобы клик пролетал сквозь иконку в инпут
+    opacity: 0.7;
+    z-index: 2;
+  }
+
+  .clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #999;
+    padding: 5px;
+    z-index: 2;
+
+    &:hover {
+      color: $base-color;
+    }
+  }
+}
