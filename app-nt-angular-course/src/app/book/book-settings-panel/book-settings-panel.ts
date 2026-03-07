@@ -9,11 +9,11 @@ import { Book } from '../book';
   styleUrl: './book-settings-panel.scss',
 })
 export class BookSettingsPanel {
-  private bookService = inject(BookService);
+  public bookService = inject(BookService);
   protected isAsc = true;
 
   onSort(criterion: string) {
     this.isAsc = !this.isAsc;
-    this.bookService.sortBooks(criterion as keyof Book, this.isAsc);
+    this.bookService.sortBooks(criterion as keyof Book);
   }
 }
