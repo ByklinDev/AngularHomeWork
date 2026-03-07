@@ -21,22 +21,12 @@ export class BookCard {
 
   book = input<Book>();
 
-//   public isFavourite = toSignal(
-//   this.bookService.favoriteBooks$.pipe(
-//     map(favs => favs.some(f => f.id === this.book()?.id))
-//   ), 
-//   { initialValue: false }
-// );
-
-
-public isFavourite = toSignal(
+  public isFavourite = toSignal(
     combineLatest([
-      this.bookService.favoriteBooks$, 
-      toObservable(this.book) // Превращаем сигнал в поток, чтобы реагировать на смену книги
-    ]).pipe(
-      map(([favs, book]) => favs.some(f => f.id === book?.id))
-    ),
-    { initialValue: false }
+      this.bookService.favoriteBooks$,
+      toObservable(this.book), // Превращаем сигнал в поток, чтобы реагировать на смену книги
+    ]).pipe(map(([favs, book]) => favs.some((f) => f.id === book?.id))),
+    { initialValue: false },
   );
 
   @Input() customTemplate?: TemplateRef<any>;

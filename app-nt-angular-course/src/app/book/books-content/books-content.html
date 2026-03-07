@@ -2,26 +2,43 @@
   <div class="settings">
     <app-book-menu></app-book-menu>
   </div>
-  <div class="search-container">
-    <input class="search-input" [(ngModel)]="$searchTerm" placeholder="Поиск через пайп..." type="text">
-  </div>
+  <!-- <div class="search-container">
+    <input
+      class="search-input"
+      [(ngModel)]="$searchTerm"
+      placeholder="Поиск через пайп..."
+      type="text"
+    />
+  </div> -->
+
   <div class="box">
-    @if ((books$ | async ) | filterBooks: $searchTerm(); as books) {
-      @for (item of books; track item.id) {
-        <app-book-card
-          #bookCard
-          [book]="item"
-          [customTemplate]="item.year < 1950 ? customTemplate : undefined"
+    @if (books$ | async | filterBooks: $searchTerm(); as books) {
+      @if (bookService.isTableView()) {
+        <app-book-table
+          [books]="books"
+          [favorites]="$favs()"
+          (onAddFavorite)="addToFavorite($event)"
+          (onDetails)="openDetails($event)"
+          (onDelete)="deleteBook($event)"
         >
-          <div card-footer class="footer-card">
-            <button class="detail-button" (click)="bookCard.openBookDetails()">Подробнее</button>
-            <button class="favorite-button" (click)="bookCard.addToFavorites($event)">
-              В избранное
-            </button>
-          </div>
-        </app-book-card>
-      } @empty {
-        <ng-container *ngTemplateOutlet="noData"></ng-container>
+        </app-book-table>
+      } @else {
+        @for (item of books; track item.id) {
+          <app-book-card
+            #bookCard
+            [book]="item"
+            [customTemplate]="item.year < 1950 ? customTemplate : undefined"
+          >
+            <div card-footer class="footer-card">
+              <button class="detail-button" (click)="bookCard.openBookDetails()">Подробнее</button>
+              <button class="favorite-button" (click)="bookCard.addToFavorites($event)">
+                В избранное
+              </button>
+            </div>
+          </app-book-card>
+        } @empty {
+          <ng-container *ngTemplateOutlet="noData"></ng-container>
+        }
       }
     } @else {
       <ng-container *ngTemplateOutlet="noData"></ng-container>
