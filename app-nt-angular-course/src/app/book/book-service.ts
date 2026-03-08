@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { Book } from './book';
 import { MOCK_BOOKS } from './book-mock';
@@ -18,9 +18,21 @@ export class BookService {
   genres$ = this.genresSubject.asObservable();
   selectedGenre$ = this.selectedGenreSource.asObservable();
   selectedBookId$ = this.selectedBookIdSource.asObservable();
-  searchTerm$ = this.searchTermSource.asObservable();
+  searchTerm$ = this.searchTermSource.asObservable().pipe(
+  debounceTime(300),
+  distinctUntilChanged()
+);;
 
   favoriteBooks$ = this.favoriteBooksSubject.asObservable();
+
+  sortState = signal<{ criterion: keyof Book, ascending: boolean } | null>(null);
+
+  readonly isTableView = signal<boolean>(false);
+
+  toggleView() {
+    this.isTableView.update((view) => !view);
+    console.log('Текущий вид:', this.isTableView());
+  }
 
   filteredBooks$ = combineLatest([
     this.booksSubject,
@@ -53,7 +65,11 @@ export class BookService {
       });
   }
 
-  sortBooks(criterion: keyof Book, ascending: boolean = true) {
+  sortBooks(criterion: keyof Book) {
+    const currentState = this.sortState();
+    const isSameCriterion = currentState?.criterion === criterion;
+    const newAscending = isSameCriterion ? !currentState.ascending : true;
+
     const currentBooks = [...this.booksSubject.value];
     const sorted = currentBooks.sort((a, b) => {
       const valA = a[criterion];
@@ -62,9 +78,10 @@ export class BookService {
       if (valA === valB) return 0;
 
       const comparison = valA! > valB! ? 1 : -1;
-      return ascending ? comparison : -comparison;
+      return newAscending ? comparison : -comparison;
     });
     this.booksSubject.next(sorted);
+    this.sortState.set({criterion, ascending: newAscending});
   }
 
   filterByGenre(genre: string | null) {
@@ -99,5 +116,15 @@ export class BookService {
 
   isFavorite(book: Book): boolean {
     return this.favoriteBooksSubject.value.some((fav) => fav.id === book.id);
+  }
+
+  deleteBook(book: Book) {
+    const currentBooks = this.booksSubject.value;
+    const updatedBooks = currentBooks.filter((b) => b.id !== book.id);
+    this.booksSubject.next(updatedBooks);
+
+    const currentFavBooks = this.favoriteBooksSubject.value;
+    const updatedFavBooks = currentFavBooks.filter((b) => b.id !== book.id);
+    this.favoriteBooksSubject.next(updatedFavBooks);
   }
 }

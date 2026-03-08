@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { BookService } from '../book-service';
 import { AsyncPipe } from '@angular/common';
 import { BookSettingsPanel } from '../book-settings-panel/book-settings-panel';
-import { FilterBooksPipe } from '../filter-books-pipe';
 
 @Component({
   selector: 'app-book-menu',

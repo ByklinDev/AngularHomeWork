@@ -1,0 +1,53 @@
+@use 'abstracts/_variables' as vars;
+
+.table-container {
+  display: block;
+    color: vars.$primary-color;
+    width: 100%;    
+}
+
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    border: 1px solid vars.$text-gray-color;
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: vars.$primary-color;
+    color: vars.$text-light-color;
+  }
+
+  tr:hover {
+    background-color: vars.$accent-color;
+  }
+}
+
+.controls {
+  margin-bottom: 1rem;
+}
+
+mark.highlight {
+  padding: 0 2px;
+  border-radius: 2px;
+}
+th.sortable {
+  cursor: pointer;
+}
+th.sortable:hover {
+  color: vars.$accent-color;
+  background: vars.$background-color;
+}
+
+table {
+  width:  calc(100% - 50px);
+  box-sizing: border-box;
+}
+:host {
+  display: block; 
+  flex-grow: 1;
+}

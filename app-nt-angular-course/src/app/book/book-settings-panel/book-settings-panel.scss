@@ -1,5 +1,12 @@
 @use 'abstracts/_variables' as vars;
 
+.settings-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
 select {
   appearance: none; 
@@ -37,7 +44,6 @@ select:focus {
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-left: 10px;
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -48,7 +54,7 @@ select:focus {
   position: relative;
 }
 
-.sort-button {
+.sort-button, .toggle-button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -81,4 +87,8 @@ select:focus {
 
 .arrow.desc {
   transform: rotate(180deg);
+}
+
+.toggle-button{
+  min-width: 120px;
 }

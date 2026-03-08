@@ -1,0 +1,38 @@
+<div class="table-container">
+  <table class="books-table">
+    <thead>
+      <tr>
+        @for (col of columns; track col.key) {
+          <th (click)="bookService.sortBooks(col.key)" class="sortable">
+            {{ col.label }}
+            @let state = bookService.sortState();
+            @if (state?.criterion === col.key) {
+              <span class="sort-icon">{{ state?.ascending ? '▲' : '▼' }}</span>
+            }
+          </th>
+        }
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of books(); track item.id) {
+        <tr>
+          <td [innerHTML]="item.title | highlightText:searchTerm()"></td>
+          <td [innerHTML]="item.author | highlightText:searchTerm()"></td>
+          <td [innerHTML]="item.year |highlightText:searchTerm()"></td>
+          <td>
+            <button class="btn-icon" (click)="handleOpenDetailsClick(item, $event)">👁️</button>
+            <button class="btn-icon" (click)="handleFavoriteClick(item, $event)">
+              @if (isFavorite(item.id)) {
+                <span>❤️</span>
+              } @else {
+                <span>🤍</span>
+              }
+            </button>
+            <button class="btn-icon" (click)="handleDeleteClick(item, $event)">🗑️</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
