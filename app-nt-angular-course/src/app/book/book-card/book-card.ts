@@ -1,4 +1,4 @@
-import { Component, inject, Input, input, signal, TemplateRef } from '@angular/core';
+import { Component, inject, Input, input, TemplateRef } from '@angular/core';
 import { Book } from '../book';
 import { ModalService } from '../../core/modal-service';
 import { BookDetailsDialog } from '../book-details-dialog/book-details-dialog';
@@ -24,7 +24,7 @@ export class BookCard {
   public isFavourite = toSignal(
     combineLatest([
       this.bookService.favoriteBooks$,
-      toObservable(this.book), // Превращаем сигнал в поток, чтобы реагировать на смену книги
+      toObservable(this.book),
     ]).pipe(map(([favs, book]) => favs.some((f) => f.id === book?.id))),
     { initialValue: false },
   );

@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Book } from '../book';
 import { BookService } from '../book-service';
 import { toSignal } from '@angular/core/rxjs-interop';

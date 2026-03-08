@@ -1,11 +1,10 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BookService } from '../book-service';
 import { BookCard } from '../book-card/book-card';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 import { BookMenu } from '../book-menu/book-menu';
 import { Book } from '../book';
-import { map } from 'rxjs';
 import { FilterBooksPipe } from '../filter-books-pipe';
 import { FormsModule } from '@angular/forms';
 import { BookTable } from '../book-table/book-table';
